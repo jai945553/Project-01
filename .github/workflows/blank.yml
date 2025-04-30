@@ -1,5 +1,4 @@
-
-name: Hello World
+name: Multi-Stage Workflow
 
 on:
   push:
@@ -7,24 +6,26 @@ on:
       - main
 
 jobs:
-  hello-world:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print Hello World
+      # Stage 1: Build
+      - name: Build project
         run: |
-          echo "Hello World"
+          echo "Building project..."
+          # Add build commands here
 
-
-  hello-world2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Print Hello World
+      # Stage 2: Test
+      - name: Run tests
         run: |
-          echo "Hello World-2"
+          echo "Running tests..."
+          # Add test commands here
+
+      # Stage 3: Deploy
+      - name: Deploy to dev
+        run: |
+           echo "Deploying...."
 
