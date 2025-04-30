@@ -11,20 +11,26 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      # Stage 1: Build
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:
       - name: Build project
         run: |
           echo "Building project..."
           # Add build commands here
+  test:
+    runs-on: ubuntu-latest
+    steps:
 
-      # Stage 2: Test
       - name: Run tests
         run: |
           echo "Running tests..."
           # Add test commands here
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
 
-      # Stage 3: Deploy
       - name: Deploy to dev
         run: |
            echo "Deploying...."
