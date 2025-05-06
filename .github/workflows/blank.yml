@@ -1,40 +1,22 @@
-name: Multi-Stage Workflow
+name: Portfolio Deployment
 
 on:
   push:
     branches:
-      - main
+    - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
- 
-        uses: actions/checkout@v3
-  build:
-    runs-on: ubuntu-latest
-    needs: [build-and-deploy]
-    steps:
-      - name: Build project
-        run: |
-          echo "Building project..."
-          # Add build commands here
-  test:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
 
-      - name: Run tests
-        run: |
-          echo "Running tests..."
-          # Add test commands here
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::783764591320:role/open-id-connect
+        aws-region: us-east-1
 
-      - name: Deploy to dev
-        run: |
-           echo "Deploying...."
-
+    - name: Deploy static site to S3 bucket
+      run: aws s3 ls
