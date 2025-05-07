@@ -1,5 +1,4 @@
-name: Portfolio Deployment
-
+name: Aws s3 bucket Deployment
 on:
   push:
     branches:
